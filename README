@@ -1,3 +1,13 @@
+$ make O=./out CC=clang LLVM=1 LLVM_IAS=1 ARCH=arm64 LOCALVERSION=-geralt-sku6_linux -j$(nproc) geralt-sku6_defconfig
+$ make O=./out CC=clang LLVM=1 LLVM_IAS=1 ARCH=arm64 LOCALVERSION=-geralt-sku6_linux -j$(nproc)
+
+
+$ mkdepthcharge -o kern-a.img --compress lzma --cmdline "console=tty1 earlycon=tty1 fbcon=rotate:3 loglevel=7 init=/sbin/init root=/dev/sdXN rootwait rw"  --vmlinuz ./arch/arm64/boot/Image ./arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku6.dtb
+
+Make partition bootable (GPT code 7F00)
+# cgpt add -i $(kern-a part number) -P 15 -T 5 -S 1 /dev/sdX
+
+
 Linux kernel
 ============
 
